@@ -1,4 +1,4 @@
-require 'FluidDb2'
+require 'fluiddb2'
 require 'mysql'
 
 module FluidDb2

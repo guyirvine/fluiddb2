@@ -2,8 +2,6 @@ require 'date'
 require 'time'
 require 'uri'
 
-require 'fluiddb/db'
-
 # FluidDb2
 module FluidDb2
   class ConnectionError < StandardError

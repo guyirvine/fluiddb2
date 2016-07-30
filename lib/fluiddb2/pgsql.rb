@@ -1,4 +1,4 @@
-require 'FluidDb2'
+require 'fluiddb2'
 require 'pg'
 
 module FluidDb2

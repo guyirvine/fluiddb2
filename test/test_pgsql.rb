@@ -1,10 +1,10 @@
 require 'minitest/autorun'
-require './lib/FluidDb2/Pgsql'
+require './lib/fluiddb2/pgsql'
 
 # PgsqlSQLTest
 class PgsqlSQLTest < Minitest::Test
   def setup
-    cs = 'pgsql://girvine:password@localhost/test'
+    cs = 'pgsql://vagrant:password@localhost/test'
     @db = FluidDb2::Pgsql.new(URI.parse(cs))
     @db.execute('DROP TABLE IF EXISTS t1')
     @db.execute('CREATE TABLE t1 ( f1 BIGINT, f2 VARCHAR(50) );')

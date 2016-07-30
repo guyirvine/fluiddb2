@@ -71,6 +71,10 @@ Vagrant.configure(2) do |config|
   # SHELL
   config.vm.provision 'shell', inline: <<-SHELL
      sudo apt-get update
-     sudo apt-get install -y ruby2.0 ruby2.0-dev git
+     sudo apt-get install -y ruby2.0 ruby2.0-dev ruby-dev git rake build-essential firebird-dev libpq-dev postgresql-9.3 firebird2.5-super
+     sudo gem install minitest pg fb
+     sudo su -c 'createuser -s vagrant' postgres
+     createdb test
+     git clone https://github.com/guyirvine/fluiddb2.git
   SHELL
 end

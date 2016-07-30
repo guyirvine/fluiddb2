@@ -1,4 +1,4 @@
-require 'FluidDb2'
+require 'fluiddb2'
 
 module FluidDb2
   class SqlNotMatchedError < StandardError

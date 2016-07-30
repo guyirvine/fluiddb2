@@ -1,5 +1,6 @@
+gem 'minitest'
 require 'minitest/autorun'
-require './lib/fluiddb2/Firebird'
+require './lib/fluiddb2/firebird'
 
 # FirebirdSQLTest
 class FirebirdSQLTest < Minitest::Test

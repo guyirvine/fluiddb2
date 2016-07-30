@@ -3,7 +3,7 @@ NServiceBus*
 out
 err
 *DS_Store*
-fluiddb-*.gem
+fluiddb2-*.gem
 build
 *.xcworkspace
 .vagrant
