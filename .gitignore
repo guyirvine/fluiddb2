@@ -1,0 +1,11 @@
+NServiceBus*
+*.log
+out
+err
+*DS_Store*
+fluiddb-*.gem
+build
+*.xcworkspace
+.vagrant
+test2
+
