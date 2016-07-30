@@ -74,7 +74,10 @@ Vagrant.configure(2) do |config|
      sudo apt-get install -y ruby2.0 ruby2.0-dev ruby-dev git rake build-essential firebird-dev libpq-dev postgresql-9.3 firebird2.5-super
      sudo gem install minitest pg fb
      sudo su -c 'createuser -s vagrant' postgres
-     createdb test
+     sudo su -c 'createdb test' postgres
+     sudo su -c 'psql -c "ALTER USER vagrant WITH password ''password'';"' template1
      git clone https://github.com/guyirvine/fluiddb2.git
+     chown -R vagrant /home/vagrant/fluiddb2
+     echo "sudo vi /etc/postgresql/9.3/main/pg_hba.conf"
   SHELL
 end

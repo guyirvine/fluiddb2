@@ -18,60 +18,60 @@ module FluidDb2
     end
 
     def query_for_array(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       @connection.results_as_hash = true
       results = @connection.execute(sql)
 
       case results.length
       when -1
-        fail FluidDb::ConnectionError
+        fail FluidDb2::ConnectionError
       when 0
-        fail FluidDb::NoDataFoundError
+        fail FluidDb2::NoDataFoundError
       when 1
         return results[0]
       else
-        fail FluidDb::TooManyRowsError
+        fail FluidDb2::TooManyRowsError
       end
     end
 
     def query_for_value(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       @connection.results_as_hash = false
       results = @connection.execute(sql)
 
       case results.length
       when -1
-        fail FluidDb::ConnectionError
+        fail FluidDb2::ConnectionError
       when 0
-        fail FluidDb::NoDataFoundError
+        fail FluidDb2::NoDataFoundError
       when 1
         return results[0][0]
       else
-        fail FluidDb::TooManyRowsError
+        fail FluidDb2::TooManyRowsError
       end
     end
 
     def query_for_resultset(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       @connection.results_as_hash = true
       results = @connection.execute(sql)
 
       case results.length
       when -1
-        fail FluidDb::ConnectionError
+        fail FluidDb2::ConnectionError
       else
         return results
       end
     end
 
     def execute(sql, params = [], expected_affected_rows = nil)
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
 
       verbose_log "#{self.class.name}.execute. #{sql}"
       r = @connection.execute(sql)
 
-      if !expected_affected_rows.nil? && r.changes != expected_affected_rows
-        fail ExpectedAffectedRowsError, "Expected affected rows, #{expected_affected_rows}, Actual affected rows, #{r.cmd_tuples}"
+      if !expected_affected_rows.nil? && @connection.changes != expected_affected_rows
+        fail ExpectedAffectedRowsError, "Expected affected rows, #{expected_affected_rows}, Actual affected rows, #{@connection.changes}"
       end
     end
 
