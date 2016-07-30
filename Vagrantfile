@@ -71,8 +71,8 @@ Vagrant.configure(2) do |config|
   # SHELL
   config.vm.provision 'shell', inline: <<-SHELL
      sudo apt-get update
-     sudo apt-get install -y ruby2.0 ruby2.0-dev ruby-dev git rake build-essential firebird-dev libpq-dev postgresql-9.3 firebird2.5-super
-     sudo gem install minitest pg fb
+     sudo apt-get install -y ruby2.0 ruby2.0-dev ruby-dev git rake build-essential firebird-dev libpq-dev postgresql-9.3 firebird2.5-super mysql-server libmysqlclient-dev libsqlite3-dev
+     sudo gem install minitest pg fb mysql sqlite3
      sudo su -c 'createuser -s vagrant' postgres
      sudo su -c 'createdb test' postgres
      sudo su -c 'psql -c "ALTER USER vagrant WITH password ''password'';"' template1

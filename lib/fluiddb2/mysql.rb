@@ -20,31 +20,31 @@ module FluidDb2
     end
 
     def query_for_array(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       results = @connection.query(sql)
 
       case results.num_rows
       when -1
-        fail FluidDb::ConnectionError
+        fail FluidDb2::ConnectionError
       when 0
-        fail FluidDb::NoDataFoundError
+        fail FluidDb2::NoDataFoundError
       when 1
         r = results.fetch_hash
         return r
       else
-        fail FluidDb::TooManyRowsError
+        fail FluidDb2::TooManyRowsError
       end
     end
 
     def query_for_value(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       results = @connection.query(sql)
 
       case results.num_rows
       when -1
-        fail FluidDb::ConnectionError
+        fail FluidDb2::ConnectionError
       when 0
-        fail FluidDb::NoDataFoundError
+        fail FluidDb2::NoDataFoundError
       when 1
         r = nil
         results.each do |row|
@@ -52,17 +52,17 @@ module FluidDb2
         end
         return r[0]
       else
-        fail FluidDb::TooManyRowsError
+        fail FluidDb2::TooManyRowsError
       end
     end
 
     def query_for_resultset(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       results = @connection.query(sql)
 
       case results.num_rows
       when -1
-        fail FluidDb::ConnectionError
+        fail FluidDb2::ConnectionError
       else
         list = []
         results.each_hash do |row|
@@ -73,7 +73,7 @@ module FluidDb2
     end
 
     def execute(sql, params = [], expected_affected_rows = nil)
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       @connection.query(sql)
 
       if !expected_affected_rows.nil? && @connection.affected_rows != expected_affected_rows
