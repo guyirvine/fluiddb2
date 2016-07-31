@@ -76,7 +76,7 @@ module FluidDb2
     end
 
     def query_for_array(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       results = @connection.execute(sql)
 
       count = 0
@@ -91,7 +91,7 @@ module FluidDb2
     end
 
     def query_for_value(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       results = @connection.execute(sql)
 
       count = 0
@@ -108,7 +108,7 @@ module FluidDb2
     end
 
     def query_for_resultset(sql, params = [])
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       results = @connection.execute(sql)
 
       list = []
@@ -120,7 +120,7 @@ module FluidDb2
     end
 
     def execute(sql, params = [], expected_affected_rows = nil)
-      sql = format_to_sql(sql, params)
+      sql = FluidDb2.format_to_sql(sql, params)
       r = @connection.execute(sql)
       r.each
 
