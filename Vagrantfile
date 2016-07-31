@@ -70,14 +70,19 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
   config.vm.provision 'shell', inline: <<-SHELL
-     sudo apt-get update
-     sudo apt-get install -y ruby2.0 ruby2.0-dev ruby-dev git rake build-essential firebird-dev libpq-dev postgresql-9.3 firebird2.5-super mysql-server libmysqlclient-dev libsqlite3-dev
-     sudo gem install minitest pg fb mysql mysql2 sqlite3
-     sudo su -c 'createuser -s vagrant' postgres
-     sudo su -c 'createdb test' postgres
-     sudo su -c 'psql -c "ALTER USER vagrant WITH password ''password'';"' template1
-     git clone https://github.com/guyirvine/fluiddb2.git
-     chown -R vagrant /home/vagrant/fluiddb2
-     echo "sudo vi /etc/postgresql/9.3/main/pg_hba.conf"
+#    debconf-set-selections <<< 'mysql-server mysql-server/root_password password password'
+#    debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password password'
+    sudo apt-get update
+    sudo apt-get install -y ruby2.0 ruby2.0-dev ruby-dev git rake build-essential libpq-dev postgresql-9.3 libsqlite3-dev mysql-server-5.5 libmysqlclient-dev
+    # firebird-dev firebird2.5-super
+    sudo gem install minitest pg sqlite3 mysql mysql2
+    # fb
+    sudo su -c 'createuser -s vagrant;createdb test' postgres
+    sudo su -c "psql -c \"ALTER USER vagrant WITH password 'password';\" template1" postgres
+    echo "CREATE DATABASE test;CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'password';GRANT ALL PRIVILEGES ON * . * TO 'vagrant'@'localhost';" | sudo mysql
+    echo "CREATE DATABASE test;CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'password';GRANT ALL PRIVILEGES ON * . * TO 'vagrant'@'localhost';" | mysql
+    git clone https://github.com/guyirvine/fluiddb2.git
+    chown -R vagrant /home/vagrant/fluiddb2
+#     echo "sudo vi /etc/postgresql/9.3/main/pg_hba.conf"
   SHELL
 end

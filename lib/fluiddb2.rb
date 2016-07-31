@@ -192,7 +192,7 @@ module FluidDb2
 
     # Transaction Semantics
     def begin
-      @connection.execute('BEGIN', [])
+      @connection.execute('BEGIN')
     end
 
     # Transaction Semantics

@@ -135,5 +135,20 @@ module FluidDb2
     def insert(_sql, _params)
       fail 'Not implemented'
     end
+
+    # Transaction Semantics
+    def begin
+      @connection.execute('BEGIN')
+    end
+
+    # Transaction Semantics
+    def commit
+      @connection.execute('COMMIT')
+    end
+
+    # Transaction Semantics
+    def rollback
+      @connection.execute('ROLLBACK')
+    end
   end
 end
