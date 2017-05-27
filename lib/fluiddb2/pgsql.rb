@@ -85,7 +85,7 @@ module FluidDb2
         fail ExpectedAffectedRowsError, "Expected affected rows, #{expected_affected_rows}, Actual affected rows, #{r.cmd_tuples}"
       end
     rescue PG::Error => e
-      raise DuplicateKeyError(e.message) unless e.message.index('duplicate key value violates unique constraint').nil?
+      raise DuplicateKeyError, e.message unless e.message.index('duplicate key value violates unique constraint').nil?
       raise e
     end
 
